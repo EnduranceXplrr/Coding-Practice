@@ -1,0 +1,25 @@
+from typing import List
+
+class Solution:
+    def maximumProduct(self, nums: List[int]) -> int:
+        # Logic: We can get largest product eaisly if we sort the array and last
+        # three elemnts are positive then their product is largest
+        # but also if first two elemnts are -ve and largest in numerical value and the last one is +ve then 
+        # product of first two element with last elemnt of sorted array of ascending order is the largest
+        # product from the array.
+        
+        # Step 1: Sorting the incoming array or List
+        nums.sort()
+        
+        # Step 2: Get the length of the list to easily find the last elements
+        n = len(nums)
+        
+        # Step 3: Calculate the two possibilities you mentioned
+        # Product of the last three elements
+        product_of_three_largest = nums[n-1] * nums[n-2] * nums[n-3]
+        
+        # Product of the first two (potentially negative) elements and the absolute largest element
+        product_with_negatives = nums[0] * nums[1] * nums[n-1]
+        
+        # Step 4: Return whichever one is larger
+        return max(product_of_three_largest, product_with_negatives)
