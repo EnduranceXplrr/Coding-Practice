@@ -1,0 +1,5 @@
+class Solution:
+    def containsDuplicate(self, nums: List[int]) -> bool:
+        # If we convert the list to a set, duplicates are automatically removed.
+        # So, if the lengths are different, there MUST have been duplicates!
+        return len(nums) != len(set(nums))
