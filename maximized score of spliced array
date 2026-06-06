@@ -1,0 +1,40 @@
+class Solution:
+    # Helper function: Standard Kadane's Algorithm to find max subarray sum
+    # Note: We initialize max_gain to 0 because we can choose NOT to swap anything
+    def maxSubarraySum(self, arr: List[int]) -> int:
+        current_gain = 0
+        max_gain = 0 
+        
+        for num in arr:
+            current_gain = max(num, current_gain + num)
+            max_gain = max(max_gain, current_gain)
+            
+        return max_gain
+
+    def maximumsSplicedArray(self, nums1: List[int], nums2: List[int]) -> int:
+        n = len(nums1)
+        
+        # Step 1: Calculate the baseline initial sums of both arrays
+        sum1 = sum(nums1)
+        sum2 = sum(nums2)
+        
+        # Step 2: Create the differences (gains) arrays
+        # diff1: What nums1 gains if we take from nums2
+        # diff2: What nums2 gains if we take from nums1
+        diff1 = [0] * n
+        diff2 = [0] * n
+        
+        for i in range(n):
+            diff1[i] = nums2[i] - nums1[i]
+            diff2[i] = nums1[i] - nums2[i]
+            
+        # Step 3: Find the maximum possible gain for both scenarios using Kadane's
+        max_gain_for_nums1 = self.maxSubarraySum(diff1)
+        max_gain_for_nums2 = self.maxSubarraySum(diff2)
+        
+        # Step 4: Compute the two best potential total scores
+        ans1 = sum1 + max_gain_for_nums1
+        ans2 = sum2 + max_gain_for_nums2
+        
+        # Return the maximum score possible
+        return max(ans1, ans2)
