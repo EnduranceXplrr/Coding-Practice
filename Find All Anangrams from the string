@@ -1,0 +1,27 @@
+class Solution:
+    def findAnagrams(self, s: str, p: str) -> List[int]:
+        if len(p) > len(s):
+            return []
+        
+        count_p = {}
+        count_s = {}
+
+        for i in range(len(p)):
+            count_p[p[i]] = count_p.get(p[i],0) + 1
+            count_s[s[i]] = count_s.get(s[i],0) + 1
+        result = [0] if count_p == count_s else []
+
+        for i in range(len(p),len(s)):
+            char_in = s[i]
+            count_s[char_in] = count_s.get(char_in, 0) + 1 #increasing sliding window size
+
+            char_out = s[i - len(p)]
+
+            count_s[char_out] -= 1 # decreasing the character count by 1 so if previously 1 then now 0 or if more than 1 then it become less by 1
+            if count_s[char_out] == 0:
+                del count_s[char_out] # cleaning so that we can compare count_s with count_p
+            if count_s == count_p:
+                strt_index = i - len(p) + 1
+                result.append(strt_index)
+            
+        return result
