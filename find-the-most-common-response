@@ -1,0 +1,17 @@
+class Solution:
+    def findCommonResponse(self, responses: List[List[str]]) -> str:
+        res = {}
+
+        for row in responses:
+            for element in set(row):
+                res[element] = res.get(element, 0) + 1
+        max_v = 0
+        check = A
+        for res_i,freq in res.items():
+            if freq > max_v:
+                max_v = freq
+                check = res_i
+            elif freq == max_v and check > res_i:
+                max_v = freq
+                check = res_i
+        return check 
