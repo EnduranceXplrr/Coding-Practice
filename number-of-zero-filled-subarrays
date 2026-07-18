@@ -1,0 +1,11 @@
+class Solution:
+    def zeroFilledSubarray(self, nums: List[int]) -> int:
+        se_0 = 0
+        total_0 = 0
+        for num in nums:
+            if num == 0:
+                se_0 += 1
+                total_0 += se_0
+            else:
+                se_0 = 0
+        return total_0
