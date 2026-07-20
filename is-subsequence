@@ -1,0 +1,15 @@
+class Solution:
+    def isSubsequence(self, s: str, t: str) -> bool:
+        sub_list = [*s]
+        if len(s) == 0:
+            return True
+        if len(t) == 0:
+            return False
+        for char in reversed(t):
+            if sub_list and char == sub_list[-1]:
+                sub_list.pop()
+        if len(sub_list)>0:
+            return False
+        else:
+            return True
+        
