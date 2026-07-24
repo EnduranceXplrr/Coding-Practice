@@ -1,0 +1,22 @@
+class Solution:
+    def reverseWords(self, s: str) -> str:
+        result = []
+        sp_index = 0
+        current_word = ""
+        for char in s:
+            if(ord(char) == 32):
+                if current_word:
+                    result.append(current_word)
+                current_word = ""
+            else:
+                current_word += char
+        if current_word:
+            result.append(current_word)
+        return " ".join(result[::-1])
+
+
+
+#OR you can also try
+# words = s.split()
+# words.reverse()
+#return " ".join(words)
