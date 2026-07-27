@@ -1,0 +1,16 @@
+class Solution:
+    def myAtoi(self, s: str) -> int:
+        
+        num_str = ""
+        for char in s.lstrip():
+            if ((char == '+'  or char == '-') and not num_str) or (ord(char)>=48 and ord(char)<58):
+                num_str += char
+            else:
+                break
+
+        INT_MIN = -2147483648
+        INT_MAX = 2147483647
+        if not num_str or (num_str == '+' or num_str == "-"):
+            return 0
+        
+        return max(INT_MIN, min(int(num_str),INT_MAX))
